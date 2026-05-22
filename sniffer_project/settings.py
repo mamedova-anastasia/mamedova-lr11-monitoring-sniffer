@@ -8,10 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-sniffer-key-2026'
 DEBUG = True
-ALLOWED_HOSTS = os.environ["REPLIT_DOMAINS"].split(',')
-CSRF_TRUSTED_ORIGINS = [
-    "https://" + domain for domain in os.environ["REPLIT_DOMAINS"].split(',')
-]
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',

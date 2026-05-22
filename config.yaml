@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-sniffer-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: django-sniffer
+
+  template:
+    metadata:
+      labels:
+        app: django-sniffer
+
+    spec:
+      containers:
+      - name: django-sniffer
+        image: lr4_mamedova-django-sniffer:latest
+
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: django-sniffer-service
+
+spec:
+  selector:
+    app: django-sniffer
+
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
+  type: LoadBalancer
